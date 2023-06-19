@@ -245,6 +245,7 @@ jobs:
     runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          nix run github:astro/deadnix -- --edit --no-lambda-pattern-names
-          git diff --exit-code || (echo "There are uncommitted changes after running command! Please check the output above."; exit 1)
+      - run: nix run github:astro/deadnix -- --edit --no-lambda-pattern-names
+      - uses: reviewdog/action-suggester@v1
+        with:
+          tool_name: deadnix
